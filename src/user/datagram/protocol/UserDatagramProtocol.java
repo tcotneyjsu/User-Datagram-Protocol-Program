@@ -19,12 +19,13 @@ import java.net.DatagramPacket;//Had to import both because of constructor error
 public class UserDatagramProtocol extends Thread{
     private DatagramSocket socket;
     private boolean running;
-    private byte[] buffer = new byte[512];
+    private byte[] buffer = new byte[256];
     
     public UserDatagramProtocol(){
         int port = 2000;
         try{
             socket = new DatagramSocket(port);
+            System.out.println("Bound to local port"+socket);
         }
         catch(Exception e){}
     }
@@ -39,13 +40,26 @@ public class UserDatagramProtocol extends Thread{
             InetAddress address = packet.getAddress();
             int port = packet.getPort();
             packet = new DatagramPacket(buffer, buffer.length, address, port);
+            String Received = new String(packet.getData(), 0, packet.getLength());
+            if (Received.equals("end")){
+                running = false;
+                System.out.println("Packet Received");
+                continue;
+            }
+            try{
+                socket.send(packet);
+            }
+            catch(Exception e){}
         }
+        socket.close();
     }
+    public String tostring()
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
+        UserDatagramProtocol test = new UserDatagramProtocol();
+        test.running();
         // TODO code application logic here
     }
     
