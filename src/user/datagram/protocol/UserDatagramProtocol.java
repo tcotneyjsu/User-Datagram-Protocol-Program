@@ -21,9 +21,13 @@ public class UserDatagramProtocol extends Thread{
     private DatagramSocket socket;
     private boolean running;
     private byte[] buffer = new byte[256];
+    public UserDatagramProtocol(){
+        (new UDSender()).start();
+        (new UDReceiver()).start();
+    }
     
     class UDReceiver extends Thread{
-        public void UDReceiver(){
+        public UDReceiver(){
             try{
                 // Create a datagram socket, bound to the specific port 2000
                 DatagramSocket socket = new DatagramSocket(2000);
@@ -59,10 +63,11 @@ public class UserDatagramProtocol extends Thread{
             catch (IOException e) 	{
                     System.out.println ("Error - " + e);
             }
-        }      
+        }
+    }    
     class UDSender extends Thread{
         //use localhost to experiment on a standalone computer
-        public void UDSender(){
+        public UDSender(){
         String hostname="localhost";    String message = "HELLO USING UDP!";
             try {
 		// Create a datagram socket, look for the first available port
@@ -113,5 +118,4 @@ public class UserDatagramProtocol extends Thread{
         UserDatagramProtocol test = new UserDatagramProtocol();
         // TODO code application logic here
     }
-    
 }
