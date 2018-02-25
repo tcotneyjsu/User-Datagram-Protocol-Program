@@ -22,12 +22,14 @@ public class UserDatagramProtocol extends Thread{
     private boolean running;
     private byte[] buffer = new byte[256];
     public UserDatagramProtocol(){
-        (new UDSender()).start();
-        (new UDReceiver()).start();
+        Thread thread_2 = new UDSender();
+        Thread thread_1 = new UDReceiver();
+        thread_2.start();
+        thread_1.start();
     }
     
     class UDReceiver extends Thread{
-        public UDReceiver(){
+        public void run(){
             try{
                 // Create a datagram socket, bound to the specific port 2000
                 DatagramSocket socket = new DatagramSocket(2000);
@@ -38,9 +40,11 @@ public class UserDatagramProtocol extends Thread{
                 DatagramPacket packet = new DatagramPacket( new byte[256], 256 );
 
                 // Receive a packet - remember by default this is a blocking operation
+                System.out.println("Hello Mergan!!!");
                 socket.receive(packet);
-
+                System.out.println("Hello A A Ron!");
                 System.out.println ("Packet received at " + new Date( ));
+                System.out.println("Hello Blak-E");
                 // Display packet information
                 InetAddress remote_addr = packet.getAddress();
                 System.out.println ("Sender: " + remote_addr.getHostAddress( ) );
@@ -68,7 +72,7 @@ public class UserDatagramProtocol extends Thread{
     //Im doing this for you trent
     class UDSender extends Thread{
         //use localhost to experiment on a standalone computer
-        public UDSender(){
+        public void run(){
         String hostname="localhost";    String message = "HELLO USING UDP!";
             try {
 		// Create a datagram socket, look for the first available port
@@ -92,7 +96,10 @@ public class UserDatagramProtocol extends Thread{
                         packet.setAddress(remote_addr);
                         packet.setPort(2000);
                         //send the packet
-                        socket.send(packet);
+                        Random random = new Random();
+                       //if(random.nextInt(0,1) = 1){
+                            socket.send(packet);
+                       //}
                         socket.close();
 		System.out.println ("Packet sent at! " + new Date());
 
