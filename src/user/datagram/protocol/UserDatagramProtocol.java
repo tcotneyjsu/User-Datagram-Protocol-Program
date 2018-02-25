@@ -65,6 +65,7 @@ public class UserDatagramProtocol extends Thread{
             }
         }
     }    
+    //Im doing this for you trent
     class UDSender extends Thread{
         //use localhost to experiment on a standalone computer
         public UDSender(){
