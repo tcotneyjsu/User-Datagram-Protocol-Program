@@ -13,7 +13,7 @@ import java.net.*;
 import java.net.DatagramSocket;//Had to import both because of constructor errors
 import java.net.DatagramPacket;//Had to import both because of constructor errors
 
-/**
+/**@Author Travis Cotney, Aaron Branham, Morgan Sweatman
  *
  * 
  */
@@ -159,7 +159,6 @@ public class UserDatagramProtocol{
 			System.out.println ("Error - " + e);
 		}
             }
-            break;
         }
     }
     /**
