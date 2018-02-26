@@ -15,9 +15,9 @@ import java.net.DatagramPacket;//Had to import both because of constructor error
 
 /**
  *
- * @author Travis
+ * 
  */
-public class UserDatagramProtocol extends Thread{
+public class UserDatagramProtocol{
     private DatagramSocket socket;
     private boolean received = false;
     private byte[] buffer = new byte[256];
@@ -76,7 +76,6 @@ public class UserDatagramProtocol extends Thread{
                     }
                     try{
                         int whatislove = random.nextInt(201);
-                        System.out.println(""+whatislove);
                         Thread.sleep(whatislove);
                     }
                     catch(Exception e){}
@@ -160,6 +159,7 @@ public class UserDatagramProtocol extends Thread{
 			System.out.println ("Error - " + e);
 		}
             }
+            break;
         }
     }
     /**
@@ -167,6 +167,7 @@ public class UserDatagramProtocol extends Thread{
      */
     public static void main(String[] args) {
         UserDatagramProtocol test = new UserDatagramProtocol();
+        
         // TODO code application logic here
     }
 }
